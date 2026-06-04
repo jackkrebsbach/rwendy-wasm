@@ -10,7 +10,8 @@ jobs:
     uses: r-wasm/actions/.github/workflows/deploy-cran-repo.yml@v3
     with:
       packages: |
-        trust
+        deSolve
+        jackkrebsbach/rwendy
     permissions:
       repository-projects: read
       pages: write
