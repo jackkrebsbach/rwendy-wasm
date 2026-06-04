@@ -1,10 +1,10 @@
 name: Build and deploy wasm R package repository
-
 on:
   workflow_dispatch:
+  repository_dispatch:
+    types: [rebuild]
   push:
     branches: [main, master]
-
 jobs:
   deploy-cran-repo:
     uses: r-wasm/actions/.github/workflows/deploy-cran-repo.yml@v3
