@@ -11,7 +11,6 @@ jobs:
     with:
       packages: |
         trust
-      webr-image: "ghcr.io/r-wasm/webr:v0.6.0"
     permissions:
       repository-projects: read
       pages: write
