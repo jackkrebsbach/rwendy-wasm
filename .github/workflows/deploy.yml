@@ -10,8 +10,8 @@ jobs:
     uses: r-wasm/actions/.github/workflows/deploy-cran-repo.yml@v3
     with:
       packages: |
-        deSolve
-      webr-image: "ghcr.io/r-wasm/webr:v0.5.4"
+        trust
+      webr-image: "ghcr.io/r-wasm/webr:v0.6.0"
     permissions:
       repository-projects: read
       pages: write
