@@ -5,51 +5,14 @@ on:
     types: [rebuild]
   push:
     branches: [main, master]
-
 jobs:
-  build-and-deploy:
-    runs-on: ubuntu-24.04
-    concurrency:
-      group: github-pages
-      cancel-in-progress: true
+  deploy-cran-repo:
+    uses: r-wasm/actions/.github/workflows/deploy-cran-repo.yml@v3
+    with:
+      packages: |
+        deSolve
+      webr-image: "ghcr.io/r-wasm/webr:v0.6.0"
     permissions:
       repository-projects: read
       pages: write
       id-token: write
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-
-    steps:
-      - name: Checkout rwendy-wasm
-        uses: actions/checkout@v4
-
-      - name: Checkout private rwendy source
-        uses: actions/checkout@v4
-        with:
-          repository: jackkrebsbach/rwendy
-          token: ${{ secrets.PAT }}
-          path: rwendy-src
-
-      - name: Checkout r-wasm/actions
-        uses: actions/checkout@v4
-        with:
-          repository: r-wasm/actions
-          ref: v3
-          path: .actions
-
-      - name: Build wasm repo
-        uses: ./.actions/build-rwasm
-        with:
-          packages: |
-            deSolve
-            local::./rwendy-src
-          repo-path: _site
-          webr-image: "ghcr.io/r-wasm/webr:v0.6.0"
-
-      - name: Upload Pages artifact
-        uses: actions/upload-pages-artifact@v3
-
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
