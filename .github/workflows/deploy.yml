@@ -12,8 +12,6 @@ jobs:
       packages: |
         deSolve
         jackkrebsbach/rwendy
-    secrets:
-      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     permissions:
       repository-projects: read
       pages: write
